@@ -1,0 +1,24 @@
+{
+    "name": "mibexx/php-time-tracking",
+    "description": "Tracks php execution time",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mike Bertram",
+            "email": "contact@mibexx.de"
+        }
+    ],
+    "require": {
+        "php": ">7.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Mibexx\\": "src/",
+            "MibexxTest\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.1",
+        "symfony/var-dumper": "^5.0"
+    }
+}

@@ -37,7 +37,8 @@ class TrackingManager implements TrackingManagerInterface
         $this->trackings[$ident]['trackings'][$this->trackings[$ident]['current']] = [
             'start' => microtime(true),
             'end' => 0,
-            'time' => 0
+            'time' => 0,
+            'timeincl' => 0,
         ];
     }
 
@@ -54,9 +55,15 @@ class TrackingManager implements TrackingManagerInterface
             -$this->trackings[$ident]['trackings'][$this->trackings[$ident]['current']]['start'],
             5
         );
-        $this->trackings[$ident]['current']++;
 
         array_pop($this->path);
+        $parentIdent = implode('->', $this->path);
+        if ($parentIdent) {
+            $this->trackings[$parentIdent]['trackings'][$this->trackings[$parentIdent]['current']]['timeincl'] += $this->trackings[$ident]['trackings'][$this->trackings[$ident]['current']]['time']
+                                                                                                                  + $this->trackings[$ident]['trackings'][$this->trackings[$ident]['current']]['timeincl'];
+        }
+
+        $this->trackings[$ident]['current']++;
     }
 
     /**

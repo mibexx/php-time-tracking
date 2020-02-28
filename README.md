@@ -39,7 +39,14 @@ use Mibexx\TimeTracking\Adapter\TimeTracking;
 
 $trackingResults = TimeTracking::getTrackings();
 
+echo '<table border="1" cellpadding="10"><thead><th align="left">Function</th><th align="right">Counter</th><th align="right">Times</th></thead><tbody>';
 foreach ($trackingResults as $ident => $results) {
-    echo $ident . ' => (' . explode('/', array_column($results, 'time')) . ')';
+    echo sprintf(
+        '<tr><td>%s</td><td align="right">%s</td><td align="right"><ul><li>%s</li></ul></td></tr>',
+        $ident,
+        count($results['trackings']),
+        implode('</li><li>', array_column($results['trackings'], 'time'))
+    );
 }
+echo '</tbody></table>';
 ```
